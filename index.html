@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A Special Note for Laxmipriya</title>
+    <!-- 1. Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- 2. Load new fonts: Montserrat for body, Great Vibes for the name -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Great+Vibes&display=swap" rel="stylesheet">
+    
+    <!-- 3. Configure Tailwind to use the loaded fonts -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Montserrat', 'sans-serif'],
+                        cursive: ['Great Vibes', 'cursive'],
+                    },
+                },
+            },
+        };
+    </script>
+
+    <!-- 4. Add custom styles for animations and effects -->
+    <style>
+        /* A simple pulse animation for the heart */
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            50% {
+                transform: scale(1.15);
+                opacity: 1;
+            }
+        }
+        .animate-heart-pulse {
+            animation: pulse 2s infinite ease-in-out;
+        }
+
+        /* A subtle gradient glow effect */
+        .gradient-glow {
+            box-shadow: 0 0 30px 8px rgba(236, 72, 153, 0.4), 
+                        0 0 50px 15px rgba(168, 85, 247, 0.3);
+        }
+
+        /* Card fade-in and scale-up animation */
+        @keyframes fadeInScaleUp {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        .animate-fade-in {
+            animation: fadeInScaleUp 1s ease-out forwards;
+        }
+
+        /* Shimmer animation for the name */
+        @keyframes shimmer {
+            0% { background-position: -500%; }
+            100% { background-position: 500%; }
+        }
+        .animate-shimmer {
+            background-image: linear-gradient(90deg, 
+                theme('colors.rose.400'), 
+                theme('colors.fuchsia.500'), 
+                theme('colors.indigo.500'),
+                theme('colors.rose.400')
+            );
+            background-size: 200% auto;
+            animation: shimmer 6s linear infinite;
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+        }
+
+        /* Subtle radial gradient for the background */
+        .bg-pattern {
+            background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.05) 0%, transparent 60%);
+        }
+
+        /* NEW: Envelope fade-out animation */
+        @keyframes fadeOut {
+            from { opacity: 1; transform: scale(1); }
+            to { opacity: 0; transform: scale(0.9); }
+        }
+        .animate-fade-out {
+            animation: fadeOut 0.5s ease-out forwards;
+        }
+
+        /* NEW: Sticker animations */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-12px); }
+        }
+        .animate-float {
+            animation: float 4s infinite ease-in-out;
+        }
+
+        @keyframes sparkle {
+            0%, 100% { opacity: 0.5; transform: scale(0.9); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+        .animate-sparkle {
+            animation: sparkle 2.5s infinite ease-in-out;
+        }
+
+    </style>
+</head>
+<!-- Updated background gradient and font -->
+<body class="bg-gradient-to-br from-gray-900 via-purple-900 to-indigo-900 font-sans bg-pattern overflow-hidden">
+
+    <!-- Main container to center everything -->
+    <div class="flex items-center justify-center min-h-screen p-6">
+
+        <!-- NEW: The Envelope (Visible first) -->
+        <div id="envelope" class="relative w-full max-w-xl bg-rose-100 rounded-xl shadow-2xl p-8 cursor-pointer transition-all duration-300 hover:scale-105">
+            <div class="h-80 flex flex-col items-center justify-center">
+                <!-- Flap line (simulated) -->
+                <div class="w-full border-t-4 border-dashed border-rose-300 opacity-70 absolute top-1/2 -translate-y-1/2"></div>
+                
+                <!-- Seal -->
+                <div class="relative bg-rose-500 w-24 h-24 rounded-full flex items-center justify-center shadow-lg animate-heart-pulse">
+                    <!-- Heart SVG -->
+                    <svg class="w-12 h-12 text-white" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+                    </svg>
+                </div>
+                
+                <!-- NEW: Name on the envelope -->
+                <h2 class="font-cursive text-5xl text-rose-600 mt-6 -mb-2">
+                    Rishav Sharma
+                </h2>
+
+                <!-- Click to Open Text -->
+                <p class="mt-6 font-sans font-bold text-rose-700 text-lg animate-pulse">
+                    Click to Open
+                </p>
+            </div>
+        </div>
+
+
+        <!-- The Card (Hidden initially) -->
+        <div id="card" class="hidden relative bg-slate-800 bg-opacity-70 backdrop-blur-md rounded-2xl shadow-2xl p-8 md:p-12 max-w-xl text-center text-white gradient-glow transform animate-fade-in">
+            
+            <!-- NEW: Sticker 1 (Floating Heart) -->
+            <div class="absolute -top-6 -left-6 animate-float" style="animation-delay: 0.5s;">
+                <svg class="w-12 h-12 text-rose-400 opacity-80" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+                </svg>
+            </div>
+
+            <!-- NEW: Sticker 2 (Sparkle) -->
+            <div class="absolute -top-5 -right-5 animate-sparkle" style="animation-delay: 1s;">
+                <svg class="w-10 h-10 text-yellow-300 opacity-90" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"></path>
+                </svg>
+            </div>
+            
+            <!-- Heart icon with pulsing animation -->
+            <div class="mb-6">
+                <svg class="w-16 h-16 text-rose-500 mx-auto animate-heart-pulse" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                    <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd"></path>
+                </svg>
+            </div>
+
+            <!-- Header message -->
+            <h2 class="font-cursive text-5xl text-rose-300 mb-4 italic">
+                To my wonderful friend,
+            </h2>
+
+            <!-- Friend's name with a text gradient -->
+            <h1 class="font-sans font-black text-6xl md:text-7xl my-6 animate-shimmer">
+                Rishav Sharma
+            </h1>
+            <!-- NEW: Added "Laxmi Priya" -->
+            <h1 class="font-sans font-black text-6xl md:text-7xl mb-6 -mt-4 animate-shimmer" style="animation-delay: 0.2s;">
+                Rishav Sharma
+            </h1>
+
+            <!-- Main message -->
+            <p class="text-gray-200 text-lg md:text-xl leading-relaxed mt-6 italic">
+                Wish you many many happy returns of the day Butki 💕. May your life be filled with joy, love, and endless blessings.
+            </p>
+            
+            <p class="text-gray-200 text-lg md:text-xl leading-relaxed mt-4 italic">
+                Wishing you all the happiness in the world!
+            </p>
+
+        </div>
+    </div>
+
+    <!-- NEW: JavaScript to handle the click interaction -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const envelope = document.getElementById('envelope');
+            const card = document.getElementById('card');
+
+            if (envelope && card) {
+                envelope.addEventListener('click', () => {
+                    // 1. Add fade-out animation to envelope
+                    envelope.classList.add('animate-fade-out');
+
+                    // 2. Wait for animation to finish
+                    setTimeout(() => {
+                        // 3. Hide envelope
+                        envelope.style.display = 'none';
+                        
+                        // 4. Show the card (it will play its own fade-in animation)
+                        card.classList.remove('hidden');
+                    }, 500); // This duration should match the 'fadeOut' animation
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
